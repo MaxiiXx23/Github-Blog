@@ -1,3 +1,7 @@
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
+
 import {
   IssuesContainer,
   List,
@@ -5,125 +9,52 @@ import {
   IssueHeader,
   Title,
   IssueDate,
-  TextIssueContainer,
-  TextIssue,
   WrapperTitle,
   WrapperDate,
+  FormatterMarkdown,
 } from './styles'
 
-export function Issues() {
+import { formatterDate } from '../../../utils/formatterDate'
+
+interface ICardAPI {
+  number: number
+  title: string
+  created_at: string
+  body: string
+}
+interface IIssuesProps {
+  listIssues: ICardAPI[]
+}
+
+export function Issues({ listIssues }: IIssuesProps) {
   return (
     <IssuesContainer>
       <List>
         {/* Item Card Issue */}
-        <IssueCard>
-          {/* Header */}
-          <IssueHeader>
-            <WrapperTitle>
-              <Title>JavaScript data types and data structures</Title>
-            </WrapperTitle>
-            <WrapperDate>
-              <IssueDate>Há 1 dia</IssueDate>
-            </WrapperDate>
-          </IssueHeader>
-          {/* Container  text Issue  */}
-          <TextIssueContainer>
-            <TextIssue>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in JavaScript and
-              what properties they have. These can be used to build other data
-              structures. Wherever possible, comparisons with other languages
-              are drawn. Dynamic typing JavaScript is a loosely typed and
-              dynamic language. Variables in JavaScript are not directly
-              associated with any particular value type, and any variable can be
-              assigned (and re-assigned) values of all types: let foo = 42; //
-              foo is now a number foo = ; // foo is now a string foo = true; //
-              foo is now a boolean
-            </TextIssue>
-          </TextIssueContainer>
-        </IssueCard>
-        <IssueCard>
-          {/* Header */}
-          <IssueHeader>
-            <WrapperTitle>
-              <Title>JavaScript data types and data structures</Title>
-            </WrapperTitle>
-            <WrapperDate>
-              <IssueDate>Há 1 dia</IssueDate>
-            </WrapperDate>
-          </IssueHeader>
-          {/* Container  text Issue  */}
-          <TextIssueContainer>
-            <TextIssue>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in JavaScript and
-              what properties they have. These can be used to build other data
-              structures. Wherever possible, comparisons with other languages
-              are drawn. Dynamic typing JavaScript is a loosely typed and
-              dynamic language. Variables in JavaScript are not directly
-              associated with any particular value type, and any variable can be
-              assigned (and re-assigned) values of all types: let foo = 42; //
-              foo is now a number foo = ; // foo is now a string foo = true; //
-              foo is now a boolean
-            </TextIssue>
-          </TextIssueContainer>
-        </IssueCard>
-        <IssueCard>
-          {/* Header */}
-          <IssueHeader>
-            <WrapperTitle>
-              <Title>JavaScript data types and data structures</Title>
-            </WrapperTitle>
-            <WrapperDate>
-              <IssueDate>Há 1 dia</IssueDate>
-            </WrapperDate>
-          </IssueHeader>
-          {/* Container  text Issue  */}
-          <TextIssueContainer>
-            <TextIssue>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in JavaScript and
-              what properties they have. These can be used to build other data
-              structures. Wherever possible, comparisons with other languages
-              are drawn. Dynamic typing JavaScript is a loosely typed and
-              dynamic language. Variables in JavaScript are not directly
-              associated with any particular value type, and any variable can be
-              assigned (and re-assigned) values of all types: let foo = 42; //
-              foo is now a number foo = ; // foo is now a string foo = true; //
-              foo is now a boolean
-            </TextIssue>
-          </TextIssueContainer>
-        </IssueCard>
-        <IssueCard>
-          {/* Header */}
-          <IssueHeader>
-            <WrapperTitle>
-              <Title>JavaScript data types and data structures</Title>
-            </WrapperTitle>
-            <WrapperDate>
-              <IssueDate>Há 1 dia</IssueDate>
-            </WrapperDate>
-          </IssueHeader>
-          {/* Container  text Issue  */}
-          <TextIssueContainer>
-            <TextIssue>
-              Programming languages all have built-in data structures, but these
-              often differ from one language to another. This article attempts
-              to list the built-in data structures available in JavaScript and
-              what properties they have. These can be used to build other data
-              structures. Wherever possible, comparisons with other languages
-              are drawn. Dynamic typing JavaScript is a loosely typed and
-              dynamic language. Variables in JavaScript are not directly
-              associated with any particular value type, and any variable can be
-              assigned (and re-assigned) values of all types: let foo = 42; //
-              foo is now a number foo = ; // foo is now a string foo = true; //
-              foo is now a boolean
-            </TextIssue>
-          </TextIssueContainer>
-        </IssueCard>
+        {listIssues.map((issue) => {
+          return (
+            <IssueCard key={issue.number}>
+              {/* Header */}
+              <IssueHeader>
+                <WrapperTitle>
+                  <Title>{issue.title}</Title>
+                </WrapperTitle>
+                <WrapperDate>
+                  <IssueDate>{formatterDate(issue.created_at)}</IssueDate>
+                </WrapperDate>
+              </IssueHeader>
+              {/* Container  text Issue  */}
+              <FormatterMarkdown>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                >
+                  {issue.body}
+                </ReactMarkdown>
+              </FormatterMarkdown>
+            </IssueCard>
+          )
+        })}
       </List>
     </IssuesContainer>
   )

@@ -39,7 +39,7 @@ export const IssueHeader = styled.header`
 `
 
 export const WrapperTitle = styled.div`
-  width: 70%;
+  width: 60%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -53,10 +53,10 @@ export const Title = styled.span`
   color: ${({ theme }) => theme['slate-100']};
 `
 export const WrapperDate = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 `
 
 export const IssueDate = styled.span`
@@ -65,15 +65,39 @@ export const IssueDate = styled.span`
   line-height: 1.6;
   color: ${({ theme }) => theme['slate-500']};
 `
-export const TextIssueContainer = styled.div`
-  width: 100%;
-`
-export const TextIssue = styled.p`
-  line-height: 1.6;
-  text-align: left;
-  color: ${({ theme }) => theme['slate-400']};
+
+export const FormatterMarkdown = styled.div`
+  max-width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+
+  text-align: left;
+  line-height: 1.6;
+  color: ${({ theme }) => theme['slate-400']};
+
+  ul {
+    padding-left: 2rem;
+  }
+  ol {
+    padding-left: 2rem;
+  }
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme['blue-500']};
+  }
+
+  a:hover {
+    text-decoration: underline;
+    transition: 0.3s;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `

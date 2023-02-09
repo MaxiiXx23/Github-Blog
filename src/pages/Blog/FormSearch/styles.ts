@@ -27,7 +27,7 @@ export const AmountPubli = styled.span`
   line-height: 1.6;
   color: ${({ theme }) => theme['slate-500']};
 `
-export const WrapperInput = styled.form`
+export const WrapperInput = styled.div`
   width: 100%;
   display: flex;
   align-items: center;

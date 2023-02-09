@@ -92,6 +92,10 @@ export const Description = styled.p`
   color: ${({ theme }) => theme['slate-400']};
 `
 
+export const FormContainerMain = styled.form`
+  width: 100%;
+`
+
 export const BadgeContainer = styled.div`
   // width: 100%;
   display: flex;
