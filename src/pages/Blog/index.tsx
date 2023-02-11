@@ -27,6 +27,7 @@ import { FormSearch } from './FormSearch'
 
 import { useGetUserGit } from '../../hooks/useGetUserGit'
 import { apiAxios } from '../../lib/axios'
+import { formatterSearch } from '../../utils/formatterSearch'
 
 const formSchema = yup.object({
   search: yup.string().required('Campo de busca vázio.'),
@@ -62,8 +63,10 @@ export function Blog() {
   async function handleSearchIssue(dataForm: IFormInputs) {
     // criar um formatter com replace para o dataForm.search
 
+    const searchFormatted = formatterSearch(dataForm.search)
+
     const response: AxiosResponse<IResponseAxios> = await apiAxios.get(
-      `/search/issues?q=${dataForm.search}%20repo:MaxiiXx23/Github-Blog`,
+      `/search/issues?q=${searchFormatted}%20repo:MaxiiXx23/Github-Blog`,
     )
 
     const { total_count: totalCount, items } = response.data

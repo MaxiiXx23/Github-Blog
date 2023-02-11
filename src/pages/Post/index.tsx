@@ -1,9 +1,12 @@
+import { useState, useEffect } from 'react'
+
 import { FaChevronLeft, FaExternalLinkAlt } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
+import { AxiosResponse } from 'axios'
 
-import { Badge } from '../../components/Badge'
+import { useParams } from 'react-router-dom'
 
 import {
   LinkBtn,
@@ -17,37 +20,67 @@ import {
   FormatterMarkdown,
 } from './styles'
 
+import { Badge } from '../../components/Badge'
+
+import { apiAxios } from '../../lib/axios'
+import { formatterDate } from '../../utils/formatterDate'
+
+interface IIssueResponse {
+  html_url: string
+  title: string
+  user: {
+    login: string
+  }
+  comments: string
+  created_at: string
+  body: string
+}
+
+interface IIssue {
+  htmlUrl: string
+  title: string
+  login: string
+  comments: string
+  created_at: string
+  body: string
+}
+
 export function Post() {
-  const markdown = `### Projeto 03 - Módulo 03 - Trilha ReactJS Ignite 2022/2023 ### ***DT-Money*** #### Sobre o projeto:
-   * DT-Money é um site que tem como objetivo facilitar a gestão de dinheiro tanto de entradas quanto de saídas, focando em API com JSON Server, performace e Context API
-  
-  
-  ### Principais tecnologias usadas no desenvolvimento:
-  
-  * TypeScript
-  * ReactJS(Vite)
-  * react-hook-form
-  * JSON Server
-  * styled-components
-  
-  ### Bibliotecas em destaque:
-  
-  * zod
-  * JSON Server
-  * use-context-selector
-  
-  ### API usada:
-  #### Front-end:
-  * JSON Server (Biblioteca para criação de uma Full Fake API)
-  
-  ### Passo-a-passo para rodar a aplicação:
-  1. Entre na pasta dt-money;
-  2. use o comando: ***yarn*** ou ***npm install/i*** para instalar os pacotes;
-  3. use o comando: ***yarn dev*** ou ***npm run dev*** para rodar a aplicação.
-  `
+  const [issue, setIssue] = useState<IIssue>({} as IIssue)
+  const { idIssue } = useParams()
+
+  async function fetchIssue() {
+    const response: AxiosResponse<IIssueResponse> = await apiAxios.get(
+      `/repos/MaxiiXx23/Github-Blog/issues/${idIssue}`,
+    )
+
+    const {
+      html_url: htmlUrl,
+      title,
+      user,
+      comments,
+      created_at: createdAt,
+      body,
+    } = response.data
+
+    setIssue({
+      htmlUrl,
+      title,
+      login: user.login,
+      comments,
+      created_at: createdAt,
+      body,
+    })
+  }
+
+  useEffect(() => {
+    fetchIssue()
+  }, [])
+
+  const dateFormatted = formatterDate(issue.created_at)
+  const totalComments = `${issue.comments} comentários.`
 
   return (
-    // container Post
     <PostContainer>
       {/* Card Post */}
       <PostCard>
@@ -59,17 +92,17 @@ export function Post() {
               <FaChevronLeft size={12} />
               VOLTAR
             </LinkBtn>
-            <LinkBtn to={'/'}>
+            <LinkBtn to={issue.htmlUrl} target="_blank">
               VER NO GITHUB
               <FaExternalLinkAlt size={12} />
             </LinkBtn>
           </WrapperLinks>
-          <Title>JavaScript data types and data structures</Title>
+          <Title>{issue.title}</Title>
           {/* Wrapper badges */}
           <BadgeContainer>
-            <Badge icon="FaGithub" text="MaxiiXx23" />
-            <Badge icon="FaCalendarDay" text="Há 1 dia" />
-            <Badge icon="FaComment" text="5 comentários" />
+            <Badge icon="FaGithub" text={issue.login} />
+            <Badge icon="FaCalendarDay" text={dateFormatted} />
+            <Badge icon="FaComment" text={totalComments} />
           </BadgeContainer>
         </InsideWrapper>
       </PostCard>
@@ -81,7 +114,7 @@ export function Post() {
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
           >
-            {markdown}
+            {issue.body}
           </ReactMarkdown>
         </FormatterMarkdown>
       </PostTextContainer>

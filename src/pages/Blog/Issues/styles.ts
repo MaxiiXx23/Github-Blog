@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { NavLink } from 'react-router-dom'
+
 export const IssuesContainer = styled.div`
   width: 100%;
   margin-top: 3rem;
@@ -16,6 +18,11 @@ export const List = styled.ul`
 `
 
 export const IssueCard = styled.li`
+  width: 100%;
+`
+
+export const WrapperIssue = styled(NavLink)`
+  text-decoration: none;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -29,6 +36,7 @@ export const IssueCard = styled.li`
 
   background-color: ${({ theme }) => theme['gray-700']};
 `
+
 export const IssueHeader = styled.header`
   width: 100%;
   display: flex;
@@ -53,7 +61,6 @@ export const Title = styled.span`
   color: ${({ theme }) => theme['slate-100']};
 `
 export const WrapperDate = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

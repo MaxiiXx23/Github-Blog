@@ -16,7 +16,7 @@ interface IUser {
 export function useGetUserGit() {
   const [user, setUser] = useState<IUser>({} as IUser)
 
-  async function FetchGithubUser() {
+  async function fetchGithubUser() {
     const response: AxiosResponse<IUser> = await apiAxios.get(
       '/users/MaxiiXx23',
     )
@@ -40,7 +40,7 @@ export function useGetUserGit() {
   }
 
   useEffect(() => {
-    FetchGithubUser()
+    fetchGithubUser()
   }, [])
 
   return user

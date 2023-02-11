@@ -6,6 +6,7 @@ import {
   IssuesContainer,
   List,
   IssueCard,
+  WrapperIssue,
   IssueHeader,
   Title,
   IssueDate,
@@ -34,24 +35,26 @@ export function Issues({ listIssues }: IIssuesProps) {
         {listIssues.map((issue) => {
           return (
             <IssueCard key={issue.number}>
-              {/* Header */}
-              <IssueHeader>
-                <WrapperTitle>
-                  <Title>{issue.title}</Title>
-                </WrapperTitle>
-                <WrapperDate>
-                  <IssueDate>{formatterDate(issue.created_at)}</IssueDate>
-                </WrapperDate>
-              </IssueHeader>
-              {/* Container  text Issue  */}
-              <FormatterMarkdown>
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                >
-                  {issue.body}
-                </ReactMarkdown>
-              </FormatterMarkdown>
+              <WrapperIssue to={`/post/${issue.number}`}>
+                {/* Header */}
+                <IssueHeader>
+                  <WrapperTitle>
+                    <Title>{issue.title}</Title>
+                  </WrapperTitle>
+                  <WrapperDate>
+                    <IssueDate>{formatterDate(issue.created_at)}</IssueDate>
+                  </WrapperDate>
+                </IssueHeader>
+                {/* Container  text Issue  */}
+                <FormatterMarkdown>
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                  >
+                    {issue.body}
+                  </ReactMarkdown>
+                </FormatterMarkdown>
+              </WrapperIssue>
             </IssueCard>
           )
         })}
