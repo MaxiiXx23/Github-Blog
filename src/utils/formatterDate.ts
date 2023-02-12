@@ -7,6 +7,7 @@ export function formatterDate(date: string) {
   }
   const dateFormatted = formatDistanceToNow(new Date(date), {
     locale: ptBR,
+    addSuffix: true,
   })
   return dateFormatted
 }

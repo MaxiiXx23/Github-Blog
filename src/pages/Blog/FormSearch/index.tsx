@@ -20,12 +20,10 @@ export function FormSearch({ totalCountPublic }: IFormSearchProps) {
 
   return (
     <SearchContainer>
-      {/* Title and amount publications */}
       <WrapperTitleAmount>
         <Title>Publicações</Title>
         <AmountPubli>{totalPublications} publicações</AmountPubli>
       </WrapperTitleAmount>
-      {/* WrapperForm and Input */}
       <WrapperInput>
         <InputSearch
           type="text"

@@ -12,8 +12,35 @@ export const PostCard = styled.div`
   width: 100%;
   border: 0;
   border-radius: 10px;
-  margin-top: -5.25rem;
+  margin-top: -5.5rem;
   background-color: ${({ theme }) => theme['gray-800']};
+
+  @media ${({ theme }) => theme.device.laptop} {
+    margin-top: -4.5rem;
+  }
+
+  @media ${({ theme }) => theme.device.tabletL} {
+    margin-top: -3.5rem;
+  }
+
+  @media ${({ theme }) => theme.device.tabletM} {
+    margin-top: -3rem;
+  }
+
+  @media ${({ theme }) => theme.device.tabletS} {
+    margin-top: -2.5rem;
+  }
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    margin-top: -2rem;
+  }
+
+  @media ${({ theme }) => theme.device.mobileM} {
+    margin-top: -1.8rem;
+  }
+  @media ${({ theme }) => theme.device.mobileS} {
+    margin-top: -1.5rem;
+  }
 `
 
 export const InsideWrapper = styled.div`
@@ -23,6 +50,10 @@ export const InsideWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 2rem;
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    align-items: center;
+  }
 `
 
 export const WrapperLinks = styled.div`
@@ -46,6 +77,10 @@ export const LinkBtn = styled(NavLink)`
   line-height: 1.6;
   text-decoration: none;
   color: ${({ theme }) => theme['blue-500']};
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    font-size: 0.625rem;
+  }
 `
 
 export const WrapperTitle = styled.div`
@@ -58,6 +93,10 @@ export const Title = styled.p`
   font-weight: bold;
   line-height: 1.3;
   color: ${({ theme }) => theme['slate-100']};
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    font-size: 1.25rem;
+  }
 `
 
 export const BadgeContainer = styled.div`
@@ -67,12 +106,15 @@ export const BadgeContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   gap: 1.5rem;
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `
 export const PostTextContainer = styled.div`
   width: 100%;
 `
-
-// Formatter tags redenrs for ReactMarkdown
 
 export const FormatterMarkdown = styled.div`
   max-width: 100%;

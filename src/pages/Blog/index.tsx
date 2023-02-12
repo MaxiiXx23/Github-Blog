@@ -61,8 +61,6 @@ export function Blog() {
   const user = useGetUserGit()
 
   async function handleSearchIssue(dataForm: IFormInputs) {
-    // criar um formatter com replace para o dataForm.search
-
     const searchFormatted = formatterSearch(dataForm.search)
 
     const response: AxiosResponse<IResponseAxios> = await apiAxios.get(
@@ -80,27 +78,21 @@ export function Blog() {
 
   return (
     <ContainerBlog>
-      {/* Card Apresentacion */}
       <ContainerMain>
         <CardApresentacion>
-          {/* Avatar User */}
           <WrapperAvatar>
             <img src={user.avatar_url} alt="" />
           </WrapperAvatar>
-          {/* Infos User */}
           <ContainerInfos>
-            {/* Principals infos */}
             <PrincipalInfos>
-              {/* Name and Link Github */}
               <WrapperNameLink>
                 <Name>{user.name}</Name>
-                <LinkGit href="#">
+                <LinkGit to="https://github.com/MaxiiXx23" target="_blank">
                   GITHUB <FaExternalLinkAlt size={12} />
                 </LinkGit>
               </WrapperNameLink>
               <Description>{user.bio}</Description>
             </PrincipalInfos>
-            {/* Badge Infos User */}
             <BadgeContainer>
               <Badge icon="FaGithub" text={user.login} />
               <Badge icon="FaBuilding" text={textCompany} />
@@ -115,8 +107,6 @@ export function Blog() {
           <FormSearch totalCountPublic={totalIssues} />
         </FormProvider>
       </FormContainerMain>
-      {/* Issues Container (List grid with two columns) */}
-
       <ContainerMain>
         <Issues listIssues={listCards} />
       </ContainerMain>

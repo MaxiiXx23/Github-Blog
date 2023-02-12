@@ -31,12 +31,10 @@ export function Issues({ listIssues }: IIssuesProps) {
   return (
     <IssuesContainer>
       <List>
-        {/* Item Card Issue */}
         {listIssues.map((issue) => {
           return (
             <IssueCard key={issue.number}>
               <WrapperIssue to={`/post/${issue.number}`}>
-                {/* Header */}
                 <IssueHeader>
                   <WrapperTitle>
                     <Title>{issue.title}</Title>
@@ -45,7 +43,6 @@ export function Issues({ listIssues }: IIssuesProps) {
                     <IssueDate>{formatterDate(issue.created_at)}</IssueDate>
                   </WrapperDate>
                 </IssueHeader>
-                {/* Container  text Issue  */}
                 <FormatterMarkdown>
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}

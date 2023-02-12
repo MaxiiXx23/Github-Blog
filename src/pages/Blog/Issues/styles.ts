@@ -15,6 +15,10 @@ export const List = styled.ul`
   grid-template-columns: auto auto;
   column-gap: 2rem;
   row-gap: 2rem;
+
+  @media ${({ theme }) => theme.device.tabletM} {
+    grid-template-columns: auto;
+  }
 `
 
 export const IssueCard = styled.li`
@@ -24,6 +28,7 @@ export const IssueCard = styled.li`
 export const WrapperIssue = styled(NavLink)`
   text-decoration: none;
   display: flex;
+  height: 12.25rem;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
@@ -43,17 +48,17 @@ export const IssueHeader = styled.header`
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: row;
-  // gap: 1rem;
 `
 
 export const WrapperTitle = styled.div`
   width: 60%;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 `
 
 export const Title = styled.span`
+  text-align: left;
   margin-top: 0.5rem;
   font-size: 1.25rem;
   font-weight: bold;

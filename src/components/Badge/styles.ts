@@ -14,4 +14,8 @@ export const BadgeWrapper = styled.span`
     color: ${({ theme }) => theme.white};
     opacity: 0.5;
   }
+
+  @media ${({ theme }) => theme.device.tabletL} {
+    font-size: 0.75rem;
+  }
 `
